@@ -4,6 +4,7 @@
 # Import needed packages
 import pandas as pd
 import numpy as np
+import os
 
 import psycopg2
 import sqlalchemy
@@ -24,7 +25,8 @@ from textwrap import dedent
 ###Data collection + cleaning
 
 # Connect to postgreSQL DB
-conn = psycopg2.connect("dbname=jordan")
+db_conn = os.environ['DATABASE_URL']
+conn = psycopg2.connect(db_conn)
 
 # Read in data from Heroku PostgresDB
 test = pd.read_sql("SELECT fy,stateabbrev,actfundedratio_gasb,planname,totmembership,investmentreturnassumption_gasb FROM pensions",
